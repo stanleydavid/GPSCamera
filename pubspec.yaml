@@ -1,0 +1,30 @@
+name: gps_camera
+description: "GPS Camera MVP: live camera preview with realtime GPS overlay burned into captured photos."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.12.0
+  flutter: ">=3.44.0"
+
+# Package versions verified on pub.dev 2026-08-16 (architect ARCHITECTURE.md §2).
+dependencies:
+  flutter:
+    sdk: flutter
+  # Camera preview / photo / video / front-rear switching (Android CameraX,
+  # iOS AVFoundation, Web camera_web). Web video via MediaRecorder.
+  camera: ^0.12.0+2
+  # Real-time GPS (web uses navigator.geolocation).
+  geolocator: ^14.0.3
+  # Pure-Dart image processing — photo GPS burn-in (one code path all platforms).
+  image: ^4.9.1
+  # Captured-video playback preview.
+  video_player: ^2.14.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

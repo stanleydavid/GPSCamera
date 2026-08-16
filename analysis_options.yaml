@@ -1,0 +1,2 @@
+# PRJ-012-T1 GPSCamera — lint configuration.
+include: package:flutter_lints/flutter.yaml
