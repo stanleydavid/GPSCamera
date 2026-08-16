@@ -15,12 +15,12 @@ import 'dart:typed_data';
 
 @JS('Blob')
 extension type _Blob(JSObject _) implements JSObject {
-  external factory _Blob(JSArray<JSAny> parts, [JSObject? options]);
+  external factory _Blob.parts(JSArray<JSAny> parts, [JSObject? options]);
 }
 
 @JS('Uint8Array')
 extension type _Uint8Array(JSObject _) implements JSObject {
-  external factory _Uint8Array(int length);
+  external factory _Uint8Array.ofLength(int length);
 
   /// `Uint8Array.prototype.set(arrayLike, offset)` — accepts any array-like
   /// (the JSArray produced by `Uint8List.toJS` works here).
@@ -61,10 +61,10 @@ extension type _Element(JSObject _) implements JSObject {
 Future<void> downloadBytes(Uint8List bytes, String filename, String mimeType) async {
   try {
     // 1. Copy the bytes into a real Uint8Array (valid BlobPart/BufferSource).
-    final _Uint8Array u8 = _Uint8Array(bytes.length)..set(bytes.toJS, 0);
+    final _Uint8Array u8 = _Uint8Array.ofLength(bytes.length)..set(bytes.toJS, 0);
     // 2. Blob part list containing exactly that typed array.
     final JSArray<JSAny> parts = <JSAny>[u8].toJS;
-    final _Blob blob = _Blob(parts);
+    final _Blob blob = _Blob.parts(parts);
 
     final String url = _createObjectUrl(blob);
     final _Element anchor = _document.createElement('a')

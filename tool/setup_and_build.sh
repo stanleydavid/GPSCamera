@@ -43,6 +43,10 @@ if [ -d .git ]; then
   git checkout -- android ios web 2>/dev/null || true
 fi
 
+# Buang test template default yang flutter create jana (widget_test.dart rujuk MyApp,
+# tak wujud dalam projek ni — coder ada test sendiri: location_data/media_service/widgets_test).
+rm -f test/widget_test.dart
+
 echo "==> pub get"
 flutter pub get | tee "$LOG_DIR/pub-get.txt"
 

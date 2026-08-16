@@ -124,7 +124,7 @@ class CameraService {
     if (code.contains('notsupported')) {
       return 'Camera is not supported by this browser.';
     }
-    final String d = e.description.trim();
+    final String d = (e.description ?? '').trim();
     return d.isNotEmpty ? d : 'Camera could not be started.';
   }
 }
