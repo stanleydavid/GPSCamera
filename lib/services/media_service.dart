@@ -24,7 +24,14 @@ class MediaService {
   ///
   /// Returns the original bytes unchanged if the image cannot be decoded.
   Future<Uint8List> burnGpsOverlay(Uint8List original, LocationData? location) async {
-    final img.Image? photo = img.decodeImage(original);
+    img.Image? photo;
+    try {
+      photo = img.decodeImage(original);
+    } catch (_) {
+      // decodeImage boleh THROW (bukan return null) untuk format tak dikenali
+      // (cth PSD header pendek -> RangeError) — layan sama seperti null: passthrough.
+      return original;
+    }
     if (photo == null) return original;
 
     final int w = photo.width;
